@@ -505,6 +505,28 @@ function App() {
                 <div className="card-title">Classic Executive</div>
                 <div className="card-desc">Centered header styles, italicized headers, and traditional serif rendering. High corporate appeal.</div>
               </div>
+              <div 
+                className="landing-card tilt-card-3d" 
+                style={{ cursor: 'pointer' }} 
+                onClick={() => selectTemplateAndEdit('developer')}
+                onMouseMove={handleMouseMove}
+                onMouseLeave={handleMouseLeave}
+              >
+                <div className="card-icon">💻</div>
+                <div className="card-title">Developer & Techie</div>
+                <div className="card-desc">Monospace code attributes, visual tech brackets, and custom layouts built specifically for engineers.</div>
+              </div>
+              <div 
+                className="landing-card tilt-card-3d" 
+                style={{ cursor: 'pointer' }} 
+                onClick={() => selectTemplateAndEdit('academic')}
+                onMouseMove={handleMouseMove}
+                onMouseLeave={handleMouseLeave}
+              >
+                <div className="card-icon">🎓</div>
+                <div className="card-title">Academic CV</div>
+                <div className="card-desc">Modern research timeline. Emphasizes publications, grants, and side-by-side date alignments.</div>
+              </div>
             </div>
           </div>
 

@@ -1291,6 +1291,177 @@ textarea.form-input {
   display: inline;
 }
 
+/* Template 5: DEVELOPER */
+.tpl-developer {
+  padding: var(--resume-margin, 20mm);
+  background-color: var(--resume-bg, #ffffff);
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.tpl-developer .developer-header {
+  display: grid;
+  grid-template-columns: 1.2fr 1fr;
+  align-items: center;
+  border-bottom: 2px solid var(--resume-accent, #3b82f6);
+  padding-bottom: 12px;
+  margin-bottom: 8px;
+  gap: 1.5rem;
+}
+
+.tpl-developer .developer-title {
+  font-size: 1.1em;
+  color: var(--resume-accent, #3b82f6);
+  font-weight: 700;
+  margin-top: 4px;
+}
+
+.tpl-developer .contact-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 6px 12px;
+  font-size: 0.88em;
+}
+
+.tpl-developer .developer-section {
+  margin-bottom: 0.5rem;
+}
+
+.tpl-developer .section-h2 {
+  font-size: 1.1em;
+  font-weight: 800;
+  text-transform: lowercase;
+  color: var(--resume-heading-color, #0f172a);
+  border-left: 4px solid var(--resume-accent, #3b82f6);
+  padding-left: 8px;
+  margin-bottom: 10px;
+  letter-spacing: -0.5px;
+}
+
+.tpl-developer .developer-item {
+  margin-bottom: 12px;
+  page-break-inside: avoid;
+  break-inside: avoid;
+}
+
+.tpl-developer .item-header-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  font-weight: 700;
+  font-size: 0.95em;
+}
+
+.tpl-developer .item-subheader {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.85em;
+  color: var(--resume-secondary, #64748b);
+  margin-bottom: 4px;
+}
+
+.tpl-developer .developer-tech-bar {
+  background: var(--resume-tag-bg, #f1f5f9);
+  border: 1px solid var(--resume-border, #e2e8f0);
+  font-family: inherit;
+  font-size: 0.78em;
+  padding: 3px 8px;
+  border-radius: 4px;
+  display: inline-block;
+  margin-top: 2px;
+  margin-bottom: 6px;
+  color: var(--resume-accent, #3b82f6);
+  font-weight: 600;
+}
+
+.tpl-developer .item-desc {
+  font-size: 0.86em;
+  line-height: 1.5;
+}
+
+/* Template 6: ACADEMIC */
+.tpl-academic {
+  padding: var(--resume-margin, 20mm);
+  background-color: var(--resume-bg, #ffffff);
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.tpl-academic .academic-header {
+  text-align: center;
+  border-bottom: 1px solid #111111;
+  padding-bottom: 14px;
+  margin-bottom: 8px;
+}
+
+.tpl-academic .academic-title {
+  font-size: 1.1em;
+  font-style: italic;
+  color: var(--resume-secondary, #475569);
+  margin-top: 4px;
+  margin-bottom: 8px;
+}
+
+.tpl-academic .academic-contact {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 4px 14px;
+  font-size: 0.85em;
+  margin-top: 10px;
+}
+
+.tpl-academic .section-h2 {
+  font-size: 1.1em;
+  font-weight: 700;
+  text-transform: uppercase;
+  border-bottom: 1px solid #111111;
+  padding-bottom: 4px;
+  margin-bottom: 14px;
+  color: var(--resume-heading-color, #111111);
+  letter-spacing: 0.5px;
+}
+
+.tpl-academic .academic-item {
+  display: grid;
+  grid-template-columns: 130px 1fr;
+  gap: 1.5rem;
+  margin-bottom: 14px;
+  page-break-inside: avoid;
+  break-inside: avoid;
+}
+
+.tpl-academic .academic-date {
+  font-weight: 600;
+  font-size: 0.88em;
+  color: var(--resume-secondary, #475569);
+  text-align: left;
+}
+
+.tpl-academic .academic-content {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.tpl-academic .academic-content-title {
+  font-weight: 700;
+  font-size: 0.95em;
+}
+
+.tpl-academic .academic-content-subtitle {
+  font-size: 0.88em;
+  color: var(--resume-secondary, #475569);
+}
+
+.tpl-academic .academic-content-desc {
+  font-size: 0.88em;
+  margin-top: 4px;
+  line-height: 1.5;
+}
+
 /* --- Print Options Media Query --- */
 @media print {
   body {

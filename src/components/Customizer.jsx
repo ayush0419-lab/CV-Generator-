@@ -45,10 +45,12 @@ function Customizer({ styles, updateStyle }) {
           <div className="customizer-title">Blueprints</div>
           <div className="template-grid">
             {[
-              { id: 'modern', name: 'Modern', slots: 'Two Column' },
-              { id: 'minimal', name: 'Minimalist', slots: 'Clean Slate' },
-              { id: 'creative', name: 'Creative', slots: 'Gradient Banner' },
-              { id: 'executive', name: 'Executive', slots: 'Traditional' }
+              { id: 'modern', name: 'Modern' },
+              { id: 'minimal', name: 'Minimalist' },
+              { id: 'creative', name: 'Creative' },
+              { id: 'executive', name: 'Executive' },
+              { id: 'developer', name: 'Dev / Techie' },
+              { id: 'academic', name: 'Academic / CV' }
             ].map(tpl => (
               <div 
                 key={tpl.id}
@@ -87,6 +89,31 @@ function Customizer({ styles, updateStyle }) {
                         <div className="mini-line" style={{ width: '95%' }} />
                         <div className="mini-line" style={{ width: '95%' }} />
                         <div className="mini-line short" style={{ width: '40%' }} />
+                      </div>
+                    )}
+                    {tpl.id === 'developer' && (
+                      <div className="mini-main" style={{ gap: '3px', background: 'rgba(21, 38, 64, 0.4)', padding: '4px', borderRadius: '2px' }}>
+                        <div className="mini-header" style={{ height: '4px', background: '#3b82f6' }} />
+                        <div className="mini-line" style={{ width: '80%', background: '#cbd5e1' }} />
+                        <div className="mini-line" style={{ width: '90%', background: '#cbd5e1' }} />
+                        <div className="mini-line short" style={{ width: '50%', background: '#3b82f6' }} />
+                      </div>
+                    )}
+                    {tpl.id === 'academic' && (
+                      <div className="mini-main" style={{ gap: '3px', padding: '4px' }}>
+                        <div className="mini-header" style={{ height: '3px', width: '70%', background: '#475569', margin: '0 auto' }} />
+                        <div style={{ display: 'flex', gap: '4px', alignItems: 'center' }}>
+                          <span style={{ width: '12px', height: '2px', background: '#94a3b8', display: 'block' }} />
+                          <div style={{ flex: 1, display: 'flex', flexDirection: 'column', gap: '2px' }}>
+                            <div className="mini-line" style={{ width: '90%' }} />
+                          </div>
+                        </div>
+                        <div style={{ display: 'flex', gap: '4px', alignItems: 'center' }}>
+                          <span style={{ width: '12px', height: '2px', background: '#94a3b8', display: 'block' }} />
+                          <div style={{ flex: 1, display: 'flex', flexDirection: 'column', gap: '2px' }}>
+                            <div className="mini-line" style={{ width: '80%' }} />
+                          </div>
+                        </div>
                       </div>
                     )}
                   </div>

@@ -794,6 +794,306 @@ function TemplateRenderer({ resumeData }) {
     );
   }
 
+  /* ================== TEMPLATE 5: DEVELOPER ================== */
+  if (styles.template === 'developer') {
+    const renderDevContactItem = (type, val) => {
+      if (!val) return null;
+      return (
+        <span className="contact-item" style={{ display: 'inline-flex', alignItems: 'center', gap: '4px', fontSize: '0.82em' }}>
+          {getInfoIcon(type)} {type === 'website' ? val.replace(/^https?:\/\//, '') : val}
+        </span>
+      );
+    };
+
+    return (
+      <div className="tpl-developer" style={textStyles}>
+        {/* Profile Avatar if enabled */}
+        {styles.avatarVisible && personal.avatar && (
+          <div style={{ display: 'flex', justifyContent: 'center', marginBottom: '8px' }}>
+            <div className="avatar-container" style={{ width: '80px', height: '80px', overflow: 'hidden', border: '3px solid var(--resume-accent)', borderRadius: styles.avatarShape === 'circle' ? '50%' : styles.avatarShape === 'square' ? '4px' : '16px' }}>
+              <img src={personal.avatar} alt="Profile" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+            </div>
+          </div>
+        )}
+
+        <div className="developer-header">
+          <div>
+            <h1 style={{ margin: 0, fontSize: '2.15em', fontWeight: 800 }}>{personal.fullName || 'Name Field'}</h1>
+            <div className="developer-title">{personal.title || 'Professional Title'}</div>
+          </div>
+          <div className="contact-grid">
+            {renderDevContactItem('email', personal.email)}
+            {renderDevContactItem('phone', personal.phone)}
+            {renderDevContactItem('location', personal.location)}
+            {renderDevContactItem('website', personal.website)}
+            {renderDevContactItem('linkedin', personal.linkedin)}
+            {renderDevContactItem('github', personal.github)}
+          </div>
+        </div>
+
+        {sectionsOrder.map((sectionKey) => {
+          if (!hasContent(sectionKey)) return null;
+
+          switch (sectionKey) {
+            case 'summary':
+              return (
+                <div key="summary" className="developer-section">
+                  <h2 className="section-h2">summary.io</h2>
+                  <p style={{ fontSize: '0.88em', margin: '4px 0 0 0', lineHeight: 1.45 }}>{personal.summary}</p>
+                </div>
+              );
+            case 'work':
+              return (
+                <div key="work" className="developer-section">
+                  <h2 className="section-h2">professional_experience</h2>
+                  {work.map((w) => (
+                    <div key={w.id} className="developer-item">
+                      <div className="item-header-row">
+                        <span className="item-title">{w.role}</span>
+                        <span style={{ color: 'var(--resume-accent)', fontSize: '0.85em', fontWeight: 'bold' }}>
+                          [{formatDate(w.startDate)} – {w.current ? 'Present' : formatDate(w.endDate)}]
+                        </span>
+                      </div>
+                      <div className="item-subheader">
+                        <span>{w.company}</span>
+                        <span>{w.location}</span>
+                      </div>
+                      <div className="item-desc" style={{ marginTop: '3px' }}>{formatDescription(w.description)}</div>
+                    </div>
+                  ))}
+                </div>
+              );
+            case 'education':
+              return (
+                <div key="education" className="developer-section">
+                  <h2 className="section-h2">education_credentials</h2>
+                  {education.map((edu) => (
+                    <div key={edu.id} className="developer-item">
+                      <div className="item-header-row">
+                        <span className="item-title">{edu.degree}</span>
+                        <span style={{ color: 'var(--resume-accent)', fontSize: '0.85em', fontWeight: 'bold' }}>[{edu.date}]</span>
+                      </div>
+                      <div className="item-subheader">
+                        <span>{edu.school}</span>
+                        <span>{edu.location}</span>
+                      </div>
+                      {edu.details && <div className="item-desc" style={{ fontStyle: 'italic', fontSize: '0.85em', marginTop: '2px', opacity: 0.85 }}>{edu.details}</div>}
+                    </div>
+                  ))}
+                </div>
+              );
+            case 'projects':
+              return (
+                <div key="projects" className="developer-section">
+                  <h2 className="section-h2">featured_projects</h2>
+                  {projects.map((p) => (
+                    <div key={p.id} className="developer-item">
+                      <div className="item-header-row">
+                        <span className="item-title">{p.name} {p.role && <span style={{ fontWeight: 'normal', fontSize: '0.9em', opacity: 0.8 }}>| {p.role}</span>}</span>
+                        {p.link && (
+                          <span style={{ fontSize: '0.85em', fontWeight: 'normal' }}>
+                            <a href={p.link} target="_blank" rel="noreferrer" style={{ color: 'var(--resume-accent)', textDecoration: 'none' }}>&lt;code_link /&gt;</a>
+                          </span>
+                        )}
+                      </div>
+                      {p.tech && <div className="developer-tech-bar">Ecosystem: {p.tech}</div>}
+                      <div className="item-desc">{formatDescription(p.description)}</div>
+                    </div>
+                  ))}
+                </div>
+              );
+            case 'skills':
+              return (
+                <div key="skills" className="developer-section">
+                  <h2 className="section-h2">technical_proficiencies</h2>
+                  <div style={{ display: 'flex', flexDirection: 'column', gap: '6px' }}>
+                    {skills.map((cat, idx) => renderSkillGroup(cat, idx))}
+                  </div>
+                </div>
+              );
+            case 'certifications':
+              return (
+                <div key="certifications" className="developer-section">
+                  <h2 className="section-h2">certifications_certificates</h2>
+                  <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '6px 12px', fontSize: '0.88em' }}>
+                    {certifications.map((c) => (
+                      <div key={c.id}>
+                        • <span style={{ fontWeight: 700 }}>{c.name}</span> – {c.issuer} ({c.date})
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              );
+            case 'languages':
+              return (
+                <div key="languages" className="developer-section">
+                  <h2 className="section-h2">spoken_languages</h2>
+                  <div style={{ display: 'flex', flexWrap: 'wrap', gap: '15px', fontSize: '0.88em' }}>
+                    {languages.map((l) => (
+                      <div key={l.id}>
+                        &gt; <span style={{ fontWeight: 750 }}>{l.name}</span>: <span>{l.level}</span>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              );
+            default:
+              return null;
+          }
+        })}
+      </div>
+    );
+  }
+
+  /* ================== TEMPLATE 6: ACADEMIC ================== */
+  if (styles.template === 'academic') {
+    const fontOverride = {
+      '--resume-font': "'Merriweather', serif",
+      '--resume-heading-color': '#111111',
+      '--resume-body-color': '#1c1917'
+    };
+
+    const contactItems = [];
+    if (personal.email) contactItems.push(personal.email);
+    if (personal.phone) contactItems.push(personal.phone);
+    if (personal.location) contactItems.push(personal.location);
+    if (personal.website) contactItems.push(personal.website.replace(/^https?:\/\//, ''));
+    if (personal.linkedin) contactItems.push(personal.linkedin);
+    if (personal.github) contactItems.push(personal.github);
+
+    return (
+      <div className="tpl-academic" style={{ ...textStyles, ...fontOverride }}>
+        <div className="academic-header">
+          <h1 style={{ margin: '0 0 4px 0', fontSize: '2.25em', fontWeight: 400 }}>{personal.fullName || 'Name Field'}</h1>
+          <div className="academic-title">{personal.title || 'Professional Title'}</div>
+          
+          <div className="academic-contact">
+            {contactItems.map((item, idx) => (
+              <React.Fragment key={idx}>
+                {idx > 0 && <span style={{ margin: '0 6px', color: '#94a3b8' }}>•</span>}
+                <span>{item}</span>
+              </React.Fragment>
+            ))}
+          </div>
+        </div>
+
+        {sectionsOrder.map((sectionKey) => {
+          if (!hasContent(sectionKey)) return null;
+
+          switch (sectionKey) {
+            case 'summary':
+              return (
+                <div key="summary" style={{ marginBottom: '1.25rem' }}>
+                  <h2 className="section-h2">Research Profile</h2>
+                  <p style={{ fontSize: '0.88em', margin: 0, textAlign: 'justify', lineHeight: 1.5 }}>{personal.summary}</p>
+                </div>
+              );
+            case 'work':
+              return (
+                <div key="work" style={{ marginBottom: '1.25rem' }}>
+                  <h2 className="section-h2">Professional Appointments</h2>
+                  {work.map((w) => (
+                    <div key={w.id} className="academic-item">
+                      <div className="academic-date">
+                        {formatDate(w.startDate)} – {w.current ? 'Present' : formatDate(w.endDate)}
+                      </div>
+                      <div className="academic-content">
+                        <div className="academic-content-title">{w.role}</div>
+                        <div className="academic-content-subtitle">{w.company}, {w.location}</div>
+                        <div className="academic-content-desc">{formatDescription(w.description)}</div>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              );
+            case 'education':
+              return (
+                <div key="education" style={{ marginBottom: '1.25rem' }}>
+                  <h2 className="section-h2">Education</h2>
+                  {education.map((edu) => (
+                    <div key={edu.id} className="academic-item">
+                      <div className="academic-date">{edu.date}</div>
+                      <div className="academic-content">
+                        <div className="academic-content-title">{edu.degree}</div>
+                        <div className="academic-content-subtitle">{edu.school}, {edu.location}</div>
+                        {edu.details && <div className="academic-content-desc" style={{ fontStyle: 'italic' }}>{edu.details}</div>}
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              );
+            case 'projects':
+              return (
+                <div key="projects" style={{ marginBottom: '1.25rem' }}>
+                  <h2 className="section-h2">Research & Development Projects</h2>
+                  {projects.map((p) => (
+                    <div key={p.id} className="academic-item">
+                      <div className="academic-date">{p.role || 'Project Lead'}</div>
+                      <div className="academic-content">
+                        <div className="academic-content-title">
+                          {p.name}
+                          {p.link && <a href={p.link} target="_blank" rel="noreferrer" style={{ fontSize: '0.8em', fontWeight: 'normal', color: 'var(--resume-accent)', marginLeft: '8px', textDecoration: 'none' }}>[Link]</a>}
+                        </div>
+                        {p.tech && <div style={{ fontSize: '0.8em', fontStyle: 'italic', margin: '2px 0' }}>Ecosystem: {p.tech}</div>}
+                        <div className="academic-content-desc">{formatDescription(p.description)}</div>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              );
+            case 'skills':
+              return (
+                <div key="skills" style={{ marginBottom: '1.25rem' }}>
+                  <h2 className="section-h2">Areas of Expertise</h2>
+                  <div style={{ display: 'flex', flexDirection: 'column', gap: '6px' }}>
+                    {skills.map((cat, idx) => (
+                      <div key={idx} style={{ fontSize: '0.88em' }}>
+                        <strong>{cat.category}:</strong> {cat.items.join(', ')}
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              );
+            case 'certifications':
+              return (
+                <div key="certifications" style={{ marginBottom: '1.25rem' }}>
+                  <h2 className="section-h2">Honors & Awards</h2>
+                  <div style={{ fontSize: '0.88em', display: 'flex', flexDirection: 'column', gap: '8px' }}>
+                    {certifications.map((c) => (
+                      <div key={c.id} className="academic-item">
+                        <div className="academic-date">{c.date}</div>
+                        <div className="academic-content">
+                          <span style={{ fontWeight: 700 }}>{c.name}</span> – <span style={{ fontStyle: 'italic' }}>{c.issuer}</span>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              );
+            case 'languages':
+              return (
+                <div key="languages" style={{ marginBottom: '1.25rem' }}>
+                  <h2 className="section-h2">Languages</h2>
+                  <div style={{ fontSize: '0.88em', display: 'flex', flexDirection: 'column', gap: '8px' }}>
+                    {languages.map((l) => (
+                      <div key={l.id} className="academic-item">
+                        <div className="academic-date">{l.level}</div>
+                        <div className="academic-content">
+                          <span style={{ fontWeight: 700 }}>{l.name}</span>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              );
+            default:
+              return null;
+          }
+        })}
+      </div>
+    );
+  }
+
   return null;
 }
 
